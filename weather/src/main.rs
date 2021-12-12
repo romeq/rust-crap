@@ -22,7 +22,7 @@ fn main() {
 
     match api_handle.request_weather() {
         Ok(weather_data) => println!("It's {}, {}°C in {}, {}.",
-             weather_data.current.condition.text, weather_data.current.temp_c,
+             weather_data.current.condition.text.to_lowercase(), weather_data.current.temp_c,
              weather_data.location.name, weather_data.location.region),
 
         Err(error) => eprintln!("API Returned Error: {}", error)
