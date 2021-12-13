@@ -40,10 +40,8 @@ impl ApiHandler {
 
     pub fn request_weather(self) -> Result<Weather, String> {
         let base_url: &str = "https://api.weatherapi.com/v1";
-        let key: String = self.key;
-        let city: String = self.city;
         let full_url: String = format!("{}/current.json?key={}&q={}&aqi=no",
-                                       base_url, key, city);
+                                       base_url, self.key, self.city);
 
         let mut request: Response = reqwest::get(&full_url).unwrap();
         if request.status() != reqwest::StatusCode::OK {
