@@ -16,8 +16,8 @@ fn main() {
     let city: &String = &args[1];
 
     let api_handle: ApiHandler = ApiHandler::new(
-        key.to_string(),
-        city.to_string()
+        String::from(key),
+        String::from(city)
     );
 
     match api_handle.request_weather() {
@@ -25,6 +25,9 @@ fn main() {
              weather_data.current.condition.text.to_lowercase(), weather_data.current.temp_c,
              weather_data.location.name, weather_data.location.region),
 
-        Err(error) => eprintln!("API Returned Error: {}", error)
+        Err(error) => {
+            eprintln!("Oops; Weather API returned error: {}", error);
+            std::process::exit(1);
+        }
     }
 }
